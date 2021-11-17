@@ -12,6 +12,7 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
+        android:padding="12dp"
         android:id="@+id/title_tv"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -20,8 +21,9 @@
         android:textColor="@android:color/black"
         android:textSize="20sp"
         android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/red_rectangle" />
-    
+
     <RadioGroup
         android:id="@+id/radio_group"
         android:layout_width="match_parent"
@@ -32,43 +34,44 @@
 
 
         <RadioButton
+            android:id="@+id/never"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_margin="6dp"
             android:text="Never" />
 
         <RadioButton
+            android:id="@+id/every_day"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_margin="6dp"
             android:text="Every day" />
 
         <RadioButton
+            android:id="@+id/every_week"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_margin="6dp"
             android:text="Every week" />
 
         <RadioButton
+            android:id="@+id/every_month"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_margin="6dp"
             android:text="Every month" />
 
         <RadioButton
+            android:id="@+id/every_year"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_margin="6dp"
             android:text="Every year" />
 
-        <RadioButton
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_margin="6dp"
-            android:text="Custom" />
     </RadioGroup>
 
     <TextView
+        android:padding="12dp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_margin="12dp"

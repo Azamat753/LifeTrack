@@ -12,6 +12,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.example.lifetrack.R;
+import com.example.lifetrack.adapter.TaskAdapter;
 import com.example.lifetrack.databinding.FragmentHomeBinding;
 
 import org.jetbrains.annotations.NotNull;
@@ -38,4 +39,7 @@ public class HomeFragment extends Fragment {
             }
         });
     }
+
+
+
 }

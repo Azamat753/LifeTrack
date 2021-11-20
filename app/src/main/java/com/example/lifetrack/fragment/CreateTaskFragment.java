@@ -23,6 +23,7 @@ import com.example.lifetrack.R;
 import com.example.lifetrack.adapter.TaskAdapter;
 import com.example.lifetrack.databinding.FragmentCreateTaskBinding;
 import com.example.lifetrack.model.TaskModel;
+import com.example.lifetrack.utils.App;
 import com.example.lifetrack.utils.Constants;
 import com.google.android.material.bottomsheet.BottomSheetDialog;
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment;
@@ -32,7 +33,7 @@ import java.util.Calendar;
 
 
 public class CreateTaskFragment extends BottomSheetDialogFragment implements DatePickerDialog.OnDateSetListener {
-    FragmentCreateTaskBinding binding;
+        FragmentCreateTaskBinding binding;
     String userTask;
     String deadline;
     String repeatCount;
@@ -86,6 +87,7 @@ public class CreateTaskFragment extends BottomSheetDialogFragment implements Dat
             @Override
             public void onClick(View view) {
                 binding.repeatTv.setText(neverBtn.getText().toString());
+                repeatCount = neverBtn.getText().toString();
                 alertDialog.dismiss();
             }
         });
@@ -102,22 +104,16 @@ public class CreateTaskFragment extends BottomSheetDialogFragment implements Dat
     }
 
     private void passModelToHomeFragment() {
-        ArrayList<TaskModel> list= new ArrayList<>();
         userTask = binding.taskEd.getText().toString();
-        deadline=binding.dateTv.getText().toString();
-        repeatCount=binding.repeatTv.getText().toString();
-        TaskModel model = new TaskModel(userTask,deadline,repeatCount);
-        Bundle bundle = new Bundle();
-        bundle.putSerializable(Constants.MODEL,model);
-        TaskAdapter taskAdapter = new TaskAdapter();
-        list.add(model);
-        taskAdapter.fillList(list);
+        TaskModel taskModel = new TaskModel(userTask, deadline, repeatCount);
+        App.getInstance().getDatabase().taskDao().insert(taskModel);
         dismiss();
     }
 
     @SuppressLint("SetTextI18n")
     @Override
     public void onDateSet(DatePicker datePicker, int year, int month, int day) {
-        binding.dateTv.setText(year + "." + month + "." + day);
+        deadline = year + "." + month + "." + day;
+        binding.dateTv.setText(deadline);
     }
 }

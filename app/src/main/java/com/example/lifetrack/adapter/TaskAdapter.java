@@ -17,6 +17,10 @@ public class TaskAdapter extends RecyclerView.Adapter<TaskAdapter.TaskViewHolder
     ArrayList<TaskModel> list;
     ItemTaskBinding binding;
 
+    public TaskAdapter(ArrayList<TaskModel> list) {
+        this.list = list;
+    }
+
     @NonNull
     @Override
     public TaskViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
@@ -28,15 +32,6 @@ public class TaskAdapter extends RecyclerView.Adapter<TaskAdapter.TaskViewHolder
     public void onBindViewHolder(@NonNull TaskViewHolder holder, int position) {
         holder.onFill(list.get(position));
     }
-
-    public void fillList(ArrayList<TaskModel> list) {
-        this.list = list;
-    }
-
-    public int getList() {
-        return list.size();
-    }
-
     @Override
     public int getItemCount() {
         return list.size();

@@ -14,8 +14,12 @@ import android.view.ViewGroup;
 import com.example.lifetrack.R;
 import com.example.lifetrack.adapter.TaskAdapter;
 import com.example.lifetrack.databinding.FragmentHomeBinding;
+import com.example.lifetrack.model.TaskModel;
+import com.example.lifetrack.utils.App;
 
 import org.jetbrains.annotations.NotNull;
+
+import java.util.ArrayList;
 
 public class HomeFragment extends Fragment {
 
@@ -38,8 +42,14 @@ public class HomeFragment extends Fragment {
                 createTaskFragment.show(requireActivity().getSupportFragmentManager(), "ololo");
             }
         });
+        initRecycler();
     }
 
-
+    private void initRecycler() {
+        App.getInstance().getDatabase().taskDao().getAll().observe(getViewLifecycleOwner(), taskModels -> {
+            TaskAdapter taskAdapter = new TaskAdapter((ArrayList<TaskModel>) taskModels);
+            binding.taskRecycler.setAdapter(taskAdapter);
+        });
+    }
 
 }

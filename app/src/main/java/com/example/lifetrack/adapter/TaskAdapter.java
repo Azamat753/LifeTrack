@@ -16,9 +16,11 @@ import java.util.ArrayList;
 public class TaskAdapter extends RecyclerView.Adapter<TaskAdapter.TaskViewHolder> {
     ArrayList<TaskModel> list;
     ItemTaskBinding binding;
+    Listener listener;
 
-    public TaskAdapter(ArrayList<TaskModel> list) {
+    public TaskAdapter(ArrayList<TaskModel> list, Listener listener) {
         this.list = list;
+        this.listener = listener;
     }
 
     @NonNull
@@ -32,6 +34,7 @@ public class TaskAdapter extends RecyclerView.Adapter<TaskAdapter.TaskViewHolder
     public void onBindViewHolder(@NonNull TaskViewHolder holder, int position) {
         holder.onFill(list.get(position));
     }
+
     @Override
     public int getItemCount() {
         return list.size();
@@ -47,6 +50,18 @@ public class TaskAdapter extends RecyclerView.Adapter<TaskAdapter.TaskViewHolder
             binding.taskTv.setText(model.getTask());
             binding.deadlineTv.setText(model.getDeadline());
             binding.repeatTv.setText(model.getRepeatCount());
+
+            itemView.setOnLongClickListener(new View.OnLongClickListener() {
+                @Override
+                public boolean onLongClick(View view) {
+                    listener.itemClick(model);
+                    return true;
+                }
+            });
         }
+    }
+
+    public interface Listener {
+        void itemClick(TaskModel taskModel);
     }
 }

@@ -4,11 +4,16 @@
     <option name="filePathToZoomLevelMap">
       <map>
         <entry key="..\:/Users/Notnik_kg/AndroidStudioProjects/LifeTrack/app/src/main/res/drawable/ic_launcher_background.xml" value="0.2703125" />
+        <entry key="..\:/Users/Notnik_kg/AndroidStudioProjects/LifeTrack/app/src/main/res/drawable/rectangle_background_button.xml" value="0.2703125" />
+        <entry key="..\:/Users/Notnik_kg/AndroidStudioProjects/LifeTrack/app/src/main/res/drawable/rectangle_background_red_button.xml" value="0.2703125" />
         <entry key="..\:/Users/Notnik_kg/AndroidStudioProjects/LifeTrack/app/src/main/res/layout/activity_main.xml" value="0.25416666666666665" />
+        <entry key="..\:/Users/Notnik_kg/AndroidStudioProjects/LifeTrack/app/src/main/res/layout/fragment_auth.xml" value="0.2" />
         <entry key="..\:/Users/Notnik_kg/AndroidStudioProjects/LifeTrack/app/src/main/res/layout/fragment_board.xml" value="0.264" />
         <entry key="..\:/Users/Notnik_kg/AndroidStudioProjects/LifeTrack/app/src/main/res/layout/fragment_create_task.xml" value="0.25416666666666665" />
+        <entry key="..\:/Users/Notnik_kg/AndroidStudioProjects/LifeTrack/app/src/main/res/layout/fragment_get_start.xml" value="0.2" />
         <entry key="..\:/Users/Notnik_kg/AndroidStudioProjects/LifeTrack/app/src/main/res/layout/fragment_home.xml" value="0.25416666666666665" />
         <entry key="..\:/Users/Notnik_kg/AndroidStudioProjects/LifeTrack/app/src/main/res/layout/fragment_on_board.xml" value="0.264" />
+        <entry key="..\:/Users/Notnik_kg/AndroidStudioProjects/LifeTrack/app/src/main/res/layout/fragment_sign_up.xml" value="0.25416666666666665" />
         <entry key="..\:/Users/Notnik_kg/AndroidStudioProjects/LifeTrack/app/src/main/res/layout/item_task.xml" value="0.264" />
         <entry key="..\:/Users/Notnik_kg/AndroidStudioProjects/LifeTrack/app/src/main/res/layout/repeat_dialog.xml" value="0.264" />
       </map>

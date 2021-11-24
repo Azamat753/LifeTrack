@@ -7,7 +7,6 @@ import android.view.ViewGroup;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.lifetrack.R;
 import com.example.lifetrack.databinding.ItemTaskBinding;
 import com.example.lifetrack.model.TaskModel;
 
@@ -54,14 +53,21 @@ public class TaskAdapter extends RecyclerView.Adapter<TaskAdapter.TaskViewHolder
             itemView.setOnLongClickListener(new View.OnLongClickListener() {
                 @Override
                 public boolean onLongClick(View view) {
-                    listener.itemClick(model);
+                    listener.itemLongClick(model);
                     return true;
+                }
+            });
+            itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    listener.itemClick(model);
                 }
             });
         }
     }
 
     public interface Listener {
-        void itemClick(TaskModel taskModel);
+        void itemLongClick(TaskModel taskModel);
+        void itemClick(TaskModel model);
     }
 }

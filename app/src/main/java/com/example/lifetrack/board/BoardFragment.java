@@ -9,7 +9,6 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
-import com.example.lifetrack.R;
 import com.example.lifetrack.databinding.FragmentBoardBinding;
 import com.example.lifetrack.utils.Constants;
 
@@ -34,7 +33,6 @@ public class BoardFragment extends Fragment {
             int position = getArguments().getInt(Constants.FRAGMENT_POSITION);
             switch (position){
                 case 0:
-                    binding.boardImage.setImageResource(R.drawable.ic_launcher_background);
                     binding.description.setText("1");
                     break;
                 case 1:

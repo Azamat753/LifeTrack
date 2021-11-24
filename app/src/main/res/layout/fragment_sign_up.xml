@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".auth.SignUpFragment">
+
+    <View
+        android:id="@+id/red_bg"
+        android:layout_width="match_parent"
+        android:layout_height="150dp"
+        android:background="@color/red"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:drawableStart="@drawable/ic_done"
+        android:drawablePadding="10dp"
+        android:text="LifeTrack"
+        android:textColor="@android:color/white"
+        android:textSize="40sp"
+        app:layout_constraintBottom_toBottomOf="@id/red_bg"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@id/red_bg" />
+
+    <EditText
+        android:id="@+id/number_ed"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="20dp"
+        android:layout_marginTop="50dp"
+        android:hint="Номер телефона"
+        app:layout_constraintTop_toBottomOf="@id/red_bg" />
+
+    <EditText
+        android:id="@+id/code_ed"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="20dp"
+        android:layout_marginTop="20dp"
+        android:hint="Код подтвердения"
+        app:layout_constraintTop_toBottomOf="@id/number_ed" />
+
+    <Button
+        android:id="@+id/send_number_btn"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Отправить номер"
+        android:layout_marginBottom="100dp"
+        app:layout_constraintBottom_toBottomOf="parent"/>
+
+
+    <Button
+        android:id="@+id/send_code_btn"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Отправить код"
+        app:layout_constraintTop_toBottomOf="@id/send_number_btn"
+        app:layout_constraintBottom_toBottomOf="parent"/>
+</androidx.constraintlayout.widget.ConstraintLayout>

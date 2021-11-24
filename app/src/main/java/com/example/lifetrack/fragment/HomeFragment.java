@@ -18,6 +18,7 @@ import com.example.lifetrack.adapter.TaskAdapter;
 import com.example.lifetrack.databinding.FragmentHomeBinding;
 import com.example.lifetrack.model.TaskModel;
 import com.example.lifetrack.utils.App;
+import com.example.lifetrack.utils.Constants;
 
 import org.jetbrains.annotations.NotNull;
 
@@ -55,7 +56,7 @@ public class HomeFragment extends Fragment implements TaskAdapter.Listener {
     }
 
     @Override
-    public void itemClick(TaskModel model) {
+    public void itemLongClick(TaskModel model) {
         new AlertDialog.Builder(requireContext())
                 .setTitle("Delete entry")
                 .setMessage("Are you sure you want to delete this entry?")
@@ -72,5 +73,14 @@ public class HomeFragment extends Fragment implements TaskAdapter.Listener {
                 .setNegativeButton(android.R.string.no, null)
                 .setIcon(android.R.drawable.ic_dialog_alert)
                 .show();
+    }
+
+    @Override
+    public void itemClick(TaskModel model) {
+        CreateTaskFragment createTaskFragment = new CreateTaskFragment();
+        Bundle bundle = new Bundle();
+        bundle.putSerializable(Constants.UPDATE_MODEL,model);
+        createTaskFragment.setArguments(bundle);
+        createTaskFragment.show(requireActivity().getSupportFragmentManager(), Constants.UPDATE);
     }
 }

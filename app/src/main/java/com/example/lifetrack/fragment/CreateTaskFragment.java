@@ -7,11 +7,7 @@ import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.fragment.app.Fragment;
-import androidx.navigation.NavController;
-import androidx.navigation.Navigation;
 
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -20,20 +16,17 @@ import android.widget.DatePicker;
 import android.widget.RadioButton;
 
 import com.example.lifetrack.R;
-import com.example.lifetrack.adapter.TaskAdapter;
 import com.example.lifetrack.databinding.FragmentCreateTaskBinding;
 import com.example.lifetrack.model.TaskModel;
 import com.example.lifetrack.utils.App;
 import com.example.lifetrack.utils.Constants;
-import com.google.android.material.bottomsheet.BottomSheetDialog;
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment;
 
-import java.util.ArrayList;
 import java.util.Calendar;
 
 
 public class CreateTaskFragment extends BottomSheetDialogFragment implements DatePickerDialog.OnDateSetListener {
-        FragmentCreateTaskBinding binding;
+    FragmentCreateTaskBinding binding;
     String userTask;
     String deadline;
     String repeatCount;
@@ -52,13 +45,32 @@ public class CreateTaskFragment extends BottomSheetDialogFragment implements Dat
     public void onViewCreated(@NonNull @org.jetbrains.annotations.NotNull View view, @Nullable @org.jetbrains.annotations.Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         initClickers();
+        fillDialog();
+    }
+
+    private void fillDialog() {
+        if (getTag().equals(Constants.UPDATE)) {
+            TaskModel taskModel = (TaskModel) getArguments().getSerializable(Constants.UPDATE_MODEL);
+
+            deadline = taskModel.getDeadline();
+            userTask = taskModel.getTask();
+            repeatCount = taskModel.getRepeatCount();
+
+            binding.taskEd.setText(userTask);
+            binding.dateTv.setText(deadline);
+            binding.repeatTv.setText(repeatCount);
+        }
     }
 
     private void initClickers() {
         binding.addBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                passModelToHomeFragment();
+                if (getTag().equals(Constants.UPDATE)) {
+                    updateTask();
+                } else {
+                    insertTask();
+                }
             }
         });
         binding.dateTv.setOnClickListener(new View.OnClickListener() {
@@ -73,6 +85,17 @@ public class CreateTaskFragment extends BottomSheetDialogFragment implements Dat
                 showRepeatDialog();
             }
         });
+    }
+
+    private void updateTask() {
+        TaskModel taskModel = (TaskModel) getArguments().getSerializable(Constants.UPDATE_MODEL);
+        deadline = binding.dateTv.getText().toString();
+        userTask = binding.taskEd.getText().toString();
+        repeatCount = binding.repeatTv.getText().toString();
+        TaskModel updateModel = new TaskModel(userTask, deadline, repeatCount);
+        updateModel.setId(taskModel.getId());
+        App.getInstance().getDatabase().taskDao().update(updateModel);
+        dismiss();
     }
 
     private void showRepeatDialog() {
@@ -103,7 +126,7 @@ public class CreateTaskFragment extends BottomSheetDialogFragment implements Dat
         datePickerDialog.show();
     }
 
-    private void passModelToHomeFragment() {
+    private void insertTask() {
         userTask = binding.taskEd.getText().toString();
         TaskModel taskModel = new TaskModel(userTask, deadline, repeatCount);
         App.getInstance().getDatabase().taskDao().insert(taskModel);

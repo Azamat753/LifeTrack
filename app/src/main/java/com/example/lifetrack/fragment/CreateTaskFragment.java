@@ -3,6 +3,8 @@ package com.example.lifetrack.fragment;
 import android.annotation.SuppressLint;
 import android.app.DatePickerDialog;
 import android.app.Dialog;
+import android.content.Context;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -16,12 +18,14 @@ import android.widget.DatePicker;
 import android.widget.RadioButton;
 
 import com.example.lifetrack.R;
+import com.example.lifetrack.adapter.TaskAdapter;
 import com.example.lifetrack.databinding.FragmentCreateTaskBinding;
 import com.example.lifetrack.model.TaskModel;
 import com.example.lifetrack.utils.App;
 import com.example.lifetrack.utils.Constants;
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment;
 
+import java.util.ArrayList;
 import java.util.Calendar;
 
 
@@ -125,8 +129,25 @@ public class CreateTaskFragment extends BottomSheetDialogFragment implements Dat
                 requireContext(), this::onDateSet, startYear, starthMonth, startDay);
         datePickerDialog.show();
     }
+    private boolean checkDay() {
+        SharedPreferences sharedPreferences = requireContext().getSharedPreferences("dayPreferences", Context.MODE_PRIVATE);
+        Calendar calendar = Calendar.getInstance();
+        String currentDay = String.valueOf(calendar.get(Calendar.DAY_OF_MONTH));
+        String dayFromPreference = sharedPreferences.getString(Constants.CURRENT_DAY, "");
+        if (currentDay.equals(dayFromPreference)) {
+            sharedPreferences.edit().clear().apply();
+            sharedPreferences.edit().putString(Constants.CURRENT_DAY, currentDay).apply();
+            return true;
+        }
+        return false;
+    }
 
     private void insertTask() {
+        if (checkDay()){
+            ArrayList<TaskModel> list = new ArrayList<>();
+            TaskAdapter taskAdapter = new TaskAdapter(list,null);
+            taskAdapter.setFillDayTrue(true);
+        }
         userTask = binding.taskEd.getText().toString();
         TaskModel taskModel = new TaskModel(userTask, deadline, repeatCount);
         App.getInstance().getDatabase().taskDao().insert(taskModel);

@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/nav_graph"
-    app:startDestination="@id/onBoardFragment">
+    app:startDestination="@id/authFragment">
 
     <fragment
         android:id="@+id/homeFragment"
@@ -20,5 +20,20 @@
         android:name="com.example.lifetrack.board.OnBoardFragment"
         android:label="fragment_on_board"
         tools:layout="@layout/fragment_on_board" />
+    <fragment
+        android:id="@+id/authFragment"
+        android:name="com.example.lifetrack.auth.AuthFragment"
+        android:label="fragment_auth"
+        tools:layout="@layout/fragment_auth" />
+    <fragment
+        android:id="@+id/getStartFragment"
+        android:name="com.example.lifetrack.auth.GetStartFragment"
+        android:label="fragment_get_start"
+        tools:layout="@layout/fragment_get_start" />
+    <fragment
+        android:id="@+id/signUpFragment"
+        android:name="com.example.lifetrack.auth.SignUpFragment"
+        android:label="fragment_sign_up"
+        tools:layout="@layout/fragment_sign_up" />
 
 </navigation>

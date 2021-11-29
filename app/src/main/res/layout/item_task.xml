@@ -3,16 +3,27 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    app:cardCornerRadius="8dp"
-    android:padding="12dp"
-    app:cardUseCompatPadding="true"
     android:foreground="?attr/selectableItemBackground"
-    app:cardElevation="8dp">
+    android:padding="12dp"
+    app:cardCornerRadius="8dp"
+    app:cardElevation="8dp"
+    app:cardUseCompatPadding="true">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:padding="16dp">
+
+        <TextView
+            android:id="@+id/date_list"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="23.230.21"
+            android:textColor="@android:color/black"
+            android:textSize="20sp"
+            android:visibility="gone"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
             android:id="@+id/task_tv"
@@ -22,7 +33,7 @@
             android:textColor="@android:color/black"
             android:textSize="24sp"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toBottomOf="@id/date_list" />
 
         <TextView
             android:id="@+id/deadline_tv"

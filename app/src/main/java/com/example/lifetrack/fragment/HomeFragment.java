@@ -38,6 +38,11 @@ public class HomeFragment extends Fragment implements TaskAdapter.Listener {
     @Override
     public void onViewCreated(@NonNull @NotNull View view, @Nullable @org.jetbrains.annotations.Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+        initClickers();
+        initRecycler();
+    }
+
+    private void initClickers() {
         binding.addFab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -45,12 +50,17 @@ public class HomeFragment extends Fragment implements TaskAdapter.Listener {
                 createTaskFragment.show(requireActivity().getSupportFragmentManager(), "ololo");
             }
         });
-        initRecycler();
+        binding.toolbarInclude.personIm.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Navigation.findNavController(requireView()).navigate(R.id.profileFragment);
+            }
+        });
     }
 
     private void initRecycler() {
         App.getInstance().getDatabase().taskDao().getAll().observe(getViewLifecycleOwner(), taskModels -> {
-            TaskAdapter taskAdapter = new TaskAdapter((ArrayList<TaskModel>) taskModels,this);
+            TaskAdapter taskAdapter = new TaskAdapter((ArrayList<TaskModel>) taskModels, this);
             binding.taskRecycler.setAdapter(taskAdapter);
         });
     }
@@ -79,7 +89,7 @@ public class HomeFragment extends Fragment implements TaskAdapter.Listener {
     public void itemClick(TaskModel model) {
         CreateTaskFragment createTaskFragment = new CreateTaskFragment();
         Bundle bundle = new Bundle();
-        bundle.putSerializable(Constants.UPDATE_MODEL,model);
+        bundle.putSerializable(Constants.UPDATE_MODEL, model);
         createTaskFragment.setArguments(bundle);
         createTaskFragment.show(requireActivity().getSupportFragmentManager(), Constants.UPDATE);
     }

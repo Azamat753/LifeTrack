@@ -16,6 +16,7 @@ import android.view.ViewGroup;
 import android.view.Window;
 import android.widget.DatePicker;
 import android.widget.RadioButton;
+import android.widget.Toast;
 
 import com.example.lifetrack.R;
 import com.example.lifetrack.adapter.TaskAdapter;
@@ -23,7 +24,11 @@ import com.example.lifetrack.databinding.FragmentCreateTaskBinding;
 import com.example.lifetrack.model.TaskModel;
 import com.example.lifetrack.utils.App;
 import com.example.lifetrack.utils.Constants;
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.gms.tasks.Task;
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment;
+import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.FirebaseFirestore;
 
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -37,6 +42,7 @@ public class CreateTaskFragment extends BottomSheetDialogFragment implements Dat
     private int startYear;
     private int starthMonth;
     private int startDay;
+    FirebaseFirestore db = FirebaseFirestore.getInstance();
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -143,15 +149,20 @@ public class CreateTaskFragment extends BottomSheetDialogFragment implements Dat
     }
 
     private void insertTask() {
-        if (checkDay()){
-            ArrayList<TaskModel> list = new ArrayList<>();
-            TaskAdapter taskAdapter = new TaskAdapter(list,null);
-            taskAdapter.setFillDayTrue(true);
-        }
         userTask = binding.taskEd.getText().toString();
         TaskModel taskModel = new TaskModel(userTask, deadline, repeatCount);
+        passToFireStore(taskModel);
         App.getInstance().getDatabase().taskDao().insert(taskModel);
         dismiss();
+    }
+
+    private void passToFireStore(TaskModel taskModel) {
+        db.collection("models").add(taskModel).addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
+            @Override
+            public void onSuccess(DocumentReference documentReference) {
+                Toast.makeText(requireContext(), "Success", Toast.LENGTH_SHORT).show();
+            }
+        });
     }
 
     @SuppressLint("SetTextI18n")
